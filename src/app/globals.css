@@ -1,26 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap');
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-display: 'Syne', sans-serif;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Custom colors */
+  --color-primary: #00C896;
+  --color-primary-dark: #00a87e;
+  --color-primary-glow: rgba(0,200,150,0.15);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --color-ink: #0A0F14;
+  --color-ink-2: #111820;
+  --color-ink-3: #18212C;
+  --color-ink-4: #1F2D3D;
+  --color-ink-5: #2A3D54;
+
+  --color-mist: #8BA0B8;
+  --color-mist-2: #B0C4D8;
+  --color-snow: #EAF2F8;
+
+  /* Shadows */
+  --shadow-glow: 0 0 20px rgba(0,200,150,0.25);
+  --shadow-glow-sm: 0 0 10px rgba(0,200,150,0.15);
+  --shadow-panel: 0 8px 32px rgba(0,0,0,0.4);
+
+  /* Animations */
+  --animate-fadeUp: fadeUp 0.25s ease-out;
+  --animate-scaleIn: scaleIn 0.2s ease-out;
+  --animate-slideLeft: slideLeft 0.25s ease-out;
+  --animate-blink: blink 1.2s ease-in-out infinite;
+  --animate-shimmer: shimmer 2s linear infinite;
+
+  @keyframes fadeUp {
+    0%   { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scaleIn {
+    0%   { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes slideLeft {
+    0%   { opacity: 0; transform: translateX(20px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50%       { opacity: 1;   transform: scale(1); }
+  }
+  @keyframes shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position:  200% 0; }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ─── Base styles ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: #0A0F14;
+  color: #EAF2F8;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #2A3D54; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #3a5270; }
+
+/* ─── Input field ─── */
+.input-field {
+  width: 100%;
+  background: #18212C;
+  border: 1px solid #2A3D54;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: #EAF2F8;
+  font-size: 0.875rem;
+  outline: none;
+  transition: all 0.2s;
+}
+.input-field::placeholder { color: #8BA0B8; }
+.input-field:focus {
+  border-color: #00C896;
+  box-shadow: 0 0 0 3px rgba(0,200,150,0.12);
+}
+
+/* ─── Typing dots ─── */
+.dot {
+  display: inline-block;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #00C896;
+}
+.dot:nth-child(1) { animation: blink 1.2s ease-in-out infinite 0s; }
+.dot:nth-child(2) { animation: blink 1.2s ease-in-out infinite 0.2s; }
+.dot:nth-child(3) { animation: blink 1.2s ease-in-out infinite 0.4s; }
+
+/* ─── Skeleton ─── */
+.skeleton {
+  background: linear-gradient(90deg, #18212C 25%, #1F2D3D 50%, #18212C 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s linear infinite;
+  border-radius: 8px;
+}
+
+/* ─── Message hover ─── */
+.msg-group:hover .msg-time { opacity: 1; }
+.msg-time { opacity: 0; transition: opacity 0.15s; }
