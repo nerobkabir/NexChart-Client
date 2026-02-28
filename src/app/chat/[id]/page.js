@@ -1,8 +1,11 @@
 "use client";
-import { useParams } from "next/navigation";
+import { useParams, useContext } from "react";
+import { MobileMenuContext } from "../layout";
 import ChatWindow from "@/components/chat/ChatWindow";
 
 export default function ConversationPage() {
   const { id } = useParams();
-  return <ChatWindow conversationId={id} />;
+  const onMenuClick = useContext(MobileMenuContext);
+
+  return <ChatWindow conversationId={id} onMenuClick={onMenuClick} />;
 }
